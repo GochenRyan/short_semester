@@ -1,0 +1,16 @@
+.container-fluid{
+	padding-left:0px;!important;
+}
+
+.menu-first{
+	font-size: 18px;
+	font-weight: normal;
+	text-align: center;
+}
+
+.menu-second li a{
+	font-size: 14px;
+	text-align: center;
+}
+
+@charset "UTF-8";

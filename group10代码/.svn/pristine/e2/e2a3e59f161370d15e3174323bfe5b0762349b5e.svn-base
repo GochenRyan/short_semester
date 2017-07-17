@@ -1,0 +1,72 @@
+package com.posts.action;
+
+import java.util.List;
+
+import com.emp.dao.RoleDao;
+import com.emp.pojo.Role;
+import com.opensymphony.xwork2.ActionSupport;
+import com.opensymphony.xwork2.ModelDriven;
+import com.posts.dao.PostDao;
+import com.posts.pojo.Posts;
+
+public class PostAction extends ActionSupport implements ModelDriven<Posts> {
+     private Posts posts = new Posts();
+     private List<Posts> lps;
+     public String listpost() throws Exception {
+ 		PostDao postDao=new PostDao();
+ 		lps=postDao.lps();
+ 		return "listpost";
+ 	}
+ 	public String findpost() throws Exception {
+ 		PostDao pd = new PostDao();
+ 		this.posts=pd.findpost(this.posts.getPno());
+ 		return "findpost";
+ 	}
+ 	public String editpost() throws Exception {
+ 		PostDao pd = new PostDao();
+ 		int i = pd.editpost(this.posts);
+ 		if (i == 0) {
+ 			return ERROR;
+ 		} else {
+ 			return this.listpost();
+ 		}
+ 	}
+ 	public String add() throws Exception {
+ 		PostDao pd = new PostDao();
+ 		int i = pd.add(this.posts);
+ 		if (i == 0) {
+ 			return ERROR;
+ 		} else {
+ 			return this.listpost();
+ 		}
+ 	}
+ 	public String delete() throws Exception {
+ 		PostDao pd = new PostDao();
+ 		int i = pd.delete(this.posts);
+ 		if (i == 0) {
+ 			return ERROR;
+ 		} else {
+ 			return this.listpost();
+ 		}
+ 	}
+ 	public List<Posts> getLps() {
+ 		return lps;
+ 	}
+
+ 	public Posts getPosts() {
+ 		return posts;
+ 	}
+
+ 	public void setPosts(Posts posts) {
+ 		this.posts = posts;
+ 	}
+
+ 	@Override
+ 	public Posts getModel() {
+ 		// TODO Auto-generated method stub
+ 		if (this.posts ==null) {
+ 			this.posts = new Posts();
+ 		}
+ 		return this.posts;
+ 	}
+}

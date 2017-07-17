@@ -1,0 +1,43 @@
+<%@page import="java.util.List" %>
+<%@page import="sun.awt.RepaintArea" %>
+<%@page import="java.util.Date" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%
+	request.setCharacterEncoding("UTF-8");
+	response.setCharacterEncoding("UTF-8");
+%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>新增部门</title>
+</head>
+<body "#F5F5DC">
+<form action=" dept_adddept.action" method="post">
+	<table border="1" style="width: 500px;">
+		<tbody>
+			<tr>
+			    <th>部门编号</th>
+				<td><input name="dptno" value="11088"/></td>
+				<th>部门名称</th>
+				<td><input name="dname" value="生产部" /></td>
+				<th>部门电话</th>
+				<td><input name="dptTel" value="020-5884039"/></td>
+				<th>上属部门</th>
+				<td><input name="upDpt" value="广州分公司" /></td>
+				<th>成立日期</th>
+				<td><input name="setupDate" value="2010-06-17" /></td>
+			</tr>
+		</tbody>
+		<tfoot>
+			<tr>
+				<input type="submit" value="添加" />
+			</tr>
+		</tfoot>
+	</table>
+	</form>
+
+</body>
+</html>

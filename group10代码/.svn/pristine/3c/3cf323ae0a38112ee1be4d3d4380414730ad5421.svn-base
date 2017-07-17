@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
+	<constant name="struts.devMode" value="true" />
+	<include file="com/emp/cfg/struts-emp.xml" />
+	<include file="com/login/cfg/struts-login.xml" />
+	<include file="com/dept/cfg/struts-dept.xml" />
+	<include file="com/posts/cfg/struts-posts.xml" />
+	<include file="com/pro/cfg/struts-pro.xml" />
+	<include file="com/dismission/cfg/struts-dis.xml" />
+	<include file="com/train/cfg/struts-train.xml" /> 
+</struts>

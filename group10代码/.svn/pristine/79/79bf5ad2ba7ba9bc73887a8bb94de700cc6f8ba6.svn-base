@@ -1,0 +1,195 @@
+package com.posts.dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.emp.pojo.Role;
+import com.posts.pojo.Posts;
+
+public class PostDao extends BaseDao {
+    public List<Posts> lps(){
+    	List<Posts> lps = new ArrayList<Posts>();
+    	String sql="SELECT \r\n" + 
+    			"  `pno`,\r\n" + 
+    			"  `pname`,\r\n" + 
+    			"  `pum` \r\n" + 
+    			"FROM\r\n" + 
+    			"  `mng`.`dpt_post` ";
+    	Connection connection=null;
+		java.sql.Statement statement=null;
+		ResultSet resultSet = null;
+		try {
+			connection=getConnection();
+			statement=connection.createStatement();
+			resultSet=statement.executeQuery(sql);
+			while(resultSet.next()) {
+				Posts posts=new Posts();
+				posts.setPno(resultSet.getInt("pno"));
+				posts.setPname(resultSet.getString("pname"));
+				posts.setPum(resultSet.getInt("pum"));
+				lps.add(posts);
+			}
+		}
+		catch (Exception e) {
+			e.getMessage();
+		}
+
+		finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return lps;
+	}
+    	
+    public Posts findpost(int pno) {
+		Posts posts = new Posts();
+		String sql="SELECT \r\n" + 
+    			"  `pno`,\r\n" + 
+    			"  `pname`,\r\n" + 
+    			"  `pum` \r\n" + 
+    			"FROM\r\n" + 
+    			"  `mng`.`dpt_post` "+ 
+				"WHERE pno= ? \r\n" ;
+		Connection connection = null;
+		PreparedStatement statement = null;	
+		ResultSet resultSet = null;
+		try {
+			connection = getConnection();
+			statement = connection.prepareStatement(sql);
+			statement.setObject(1, pno);
+			resultSet=statement.executeQuery();
+			while(resultSet.next()) {
+				posts.setPno(resultSet.getInt("pno"));
+				posts.setPname(resultSet.getString("pname"));
+				posts.setPum(resultSet.getInt("pum"));
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		} finally {			
+			try {
+				statement.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return posts;
+	}
+	public int editpost(Posts posts) {
+		int i = 0;
+		String sql = "UPDATE \r\n" + 
+				"  `mng`.`dpt_post` \r\n" + 
+				"SET\r\n" + 
+				"  `pno` = ? ,\r\n" + 
+				"  `pname` = ? ,\r\n" + 
+				"  `pum` = ?  \r\n" + 
+				"WHERE `pno` = ?  ";
+		Connection connection = null;
+		PreparedStatement statement = null;		 
+		try {
+			connection = getConnection();
+			statement = connection.prepareStatement(sql);
+			statement.setObject(1, posts.getPno());
+			statement.setObject(2, posts.getPname());
+			statement.setObject(3, posts.getPum());
+			statement.setObject(4, posts.getPno());
+			i = statement.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		} finally {			
+			try {
+				statement.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return i;
+	}
+	public int add(Posts posts) {
+		int i = 0;
+		String sql = "  INSERT INTO `mng`.`dpt_post` (`pno`, `pname`, `pum`) \r\n" + 
+				"VALUES\r\n" + 
+				"  (  ?  , ? , ? )   ";
+		Connection connection = null;
+		PreparedStatement statement = null;		 
+		try {
+			connection = getConnection();
+			statement = connection.prepareStatement(sql);
+			statement.setObject(1, posts.getPno());
+			statement.setObject(2, posts.getPname());
+			statement.setObject(3, posts.getPum());
+			i = statement.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		} finally {			
+			try {
+				statement.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return i;
+	}
+	public int delete(Posts posts) {
+		int i = 0;
+		String sql = "DELETE \r\n" + 
+				"FROM\r\n" + 
+				"  `mng`.`dpt_post` \r\n" + 
+				"WHERE `pno` = ? ";
+		Connection connection = null;
+		PreparedStatement statement = null;		 
+		try {
+			connection = getConnection();
+			statement = connection.prepareStatement(sql);
+			statement.setObject(1, posts.getPno());
+			i = statement.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		} finally {			
+			try {
+				statement.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return i;
+	}
+
+}   
+    
+

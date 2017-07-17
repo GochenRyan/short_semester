@@ -1,0 +1,43 @@
+package com.pro.action;
+
+import java.util.ArrayList;
+import java.util.List;
+import com.opensymphony.xwork2.ActionSupport;
+import com.opensymphony.xwork2.ModelDriven;
+import com.pro.dao.ProDao;
+import com.pro.pojo.Pro;
+
+public class ProAction  extends ActionSupport implements ModelDriven<Pro>{
+	private Pro pro=new Pro();
+	/*列出部门信息*/
+
+	
+	public String listPro() throws Exception {
+		ProDao Pd = new ProDao();
+		lp = Pd.lp();
+		return "listPro";
+	}
+  private  List<Pro> lp;
+  private List<Pro> getLp(){
+	  return lp;
+	 
+  }
+  
+  public Pro getPro(){
+	  return pro;
+  }
+ 
+  public void setPro(Pro pro){
+	  this.pro = pro;
+  }
+	@Override
+	public Pro getModel() {
+	  if(this.pro ==null){
+		  this.pro = new Pro();
+	  }
+	   return this.pro;
+	   
+	}
+
+}
+	

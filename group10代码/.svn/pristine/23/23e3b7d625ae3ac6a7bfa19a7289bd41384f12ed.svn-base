@@ -1,0 +1,70 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>培训中员工信息表</title>
+<link rel="stylesheet"
+	href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+<script
+	src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body "#F5F5DC">
+	<!-- HTML HERE -->
+	<table class="table table-striped">
+		<caption>培训中员工信息表</caption>
+		<thead>
+			<th>员工号</th>			
+			<th>培训项目名称</th>
+			<th>培训类型</th>
+			<th>培训公司</th>
+			<th>负责人</th>
+			<th>培训范围</th>
+			<th>培训地点</th>
+			<th>培训开始时间</th>
+			<th>培训结束时间</th>
+			<th>培训费用</th>
+			
+		</thead>
+		<tbody>
+			<c:if test="${ empty  requestScope.lts }">
+				<tr>
+					<td colspan="3">没有角色数据</td>
+				</tr>
+			</c:if>
+			<c:if test="${ not  empty requestScope.lts}">
+				<c:forEach items="${ requestScope.lts }" var="t">
+					<tr>
+						<td>${t.empno}</td>
+					
+						<td>${t.trainName}</td>
+						<td>${t.trainType}</td>
+						<td>${t.trainCmp}</td>
+						<td>${t.trainLeader}</td>
+						<td>${t.trainRange}</td>
+						<td>${t.trainLoc}</td>
+						<td>${t.trainStart}</td>
+						<td>${t.trainEnd}</td>
+						<td>${t.trainCost}</td>
+					  
+					</tr>
+				</c:forEach>
+			</c:if>
+		</tbody>
+		  
+			<!-- <a href="aparttrain.jsp">申请培训</a>-->
+		
+		  
+		
+	</table>
+
+
+	<!-- END HTML -->
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+	<script src="${ basePath}js/jquery-min-1.12.4.js"></script>
+	<!-- Include all compiled plugins (below), or include individual files as needed -->

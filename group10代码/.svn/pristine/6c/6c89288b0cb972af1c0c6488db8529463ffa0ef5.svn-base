@@ -1,0 +1,86 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>员工信息</title>
+<link rel="stylesheet"
+	href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+<script
+	src="http://c dn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="${ basePath}js/jquery-min-1.12.4.js"></script>
+</head>
+<body lang="zh-CN">
+<div class="panel panel-default">
+    <div class="panel-heading">员工信息列表</div>
+    <div class="panel-body">
+    </div>
+	<table class="table table-striped table-hover">
+		<thead>
+			<th>员工号</th>			
+			<th>姓名</th>			
+			<th>性别</th>						
+			<th>入职岗位</th>		
+			<th>入职部门</th>							
+			<th>员工性质</th>
+			<th>联系电话</th>				
+			<th>操作</th>		
+		</thead>
+			<tbody>	
+		<c:if test="${ empty  requestScope.lrs}">
+			<tr>
+				<td colspan="3">没有角色数据</td>
+			</tr>
+		</c:if>
+		<c:if test="${ not  empty  requestScope.lrs}">
+			<c:forEach items="${requestScope.lrs}" var="r" varStatus="list">
+				<tr>
+					<td>${r.empno}</td>
+					<td>${r.ename}</td>
+					<td>${r.esex}</td>					
+					<td>${r.pname}</td>
+					<td>${r.dname}</td>					
+					<td>
+							<c:if test="${r.if_pro eq '是'}">
+								试用员工
+							</c:if>
+							<c:if test="${r.if_pro eq '否'}">
+								正式员工
+							</c:if>
+					</td>
+					<td>${r.etel}</td>
+					<td>
+						<a href="role_findrole2.action?empno=${r.empno}">
+						<input type="button" class="btn btn-info btn-sm" value="详细信息"></a>
+
+						<a href="role_findrole.action?empno=${r.empno}">
+                            <input type="button" class="btn btn-info btn-sm" value="编辑"></a>
+					 <a href="../dismission/apart.jsp?empno=${r.empno}">
+                            <input type="button" class="btn btn-info btn-sm" value="离职"></a>
+						<c:if test="${r.if_train eq '是'}">
+							<a href="#">
+								<input type="button" class="btn btn-info btn-sm" value="培训" disabled></a>
+						</c:if>
+						<c:if test="${r.if_train eq '否'}">
+							<a href="../train/aparttrain.jsp?empno=${r.empno}">
+								<input type="button" class="btn btn-info btn-sm" value="培训"></a>
+						</c:if>
+					</td>
+				</tr>
+			</c:forEach>
+		</c:if>
+		</tbody>
+	</table>
+	</div>
+<ul class="pager">
+    <li class="previous" onclick="javascript:window.history.back();location.reload();"><a href="#">&larr; 返回</a></li>
+</ul>
+
+</body>
+</html>
+<script src="${ basePath}js/jquery-min-1.12.4.js"></script>

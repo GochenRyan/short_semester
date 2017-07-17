@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+	<package name="_posts" namespace="/posts" extends="struts-default">
+	<interceptors>
+			<interceptor name="userInterceptor" class="com.other.interceptor.UserInterceptor" />
+		</interceptors>
+		<!-- 定义全局result -->
+		<global-results>
+			<result name="login" type="redirect">/notlogin.jsp</result>
+		</global-results>
+		<action name="listpost" class="com.posts.action.PostAction"
+			method="listpost">
+			 <result name="listpost">/posts/postlist.jsp</result>
+			<interceptor-ref name="userInterceptor"/> <!-- 应用自定义拦截器 -->
+		</action>
+		<action name="listTransfer" class="com.posts.action.PostAction"
+			method="listTransfer">
+		   <result name="listTransfer">/posts/listTransfer.jsp</result>
+			<interceptor-ref name="userInterceptor"/> <!-- 应用自定义拦截器 -->
+		</action>
+		<action name="posts_*" class="com.posts.action.PostAction" method="{1}">
+		    <result name="editpost">/posts/postedit.jsp</result>
+		   <result name="error">/error.jsp</result>
+		    <result name="findrole">/posts/findrole1.jsp</result>
+		   <result name="before">/posts/transfer1.jsp</result>
+		   <result name="listpost">/posts/postlist.jsp</result>
+		</action>
+	</package>
+</struts>

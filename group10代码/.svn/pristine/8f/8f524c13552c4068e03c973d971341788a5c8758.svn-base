@@ -1,0 +1,44 @@
+package com.dismission.action;
+
+import java.util.List;
+
+import com.dismission.dao.DisDao;
+import com.dismission.pojo.DisEmp;
+import com.opensymphony.xwork2.ActionSupport;
+
+public class DisAction extends ActionSupport {
+	private List<DisEmp> disEmps;
+	private DisEmp disEmp;
+	public String add() throws Exception {
+		DisDao disDao = new DisDao();
+		int i=0;
+		i=disDao.add(disEmp);
+		if ( i== 0) {
+			return ERROR;
+		} else {
+			i=disDao.dis(disEmp.getEmpno());
+			if ( i== 0) {
+				return ERROR;
+			}
+			else{
+				return this.list();
+			}
+		}
+
+	}
+	public String list() throws Exception {
+		DisDao disDao = new DisDao();
+		disEmps = disDao.list();
+		return "list";
+	}
+
+
+	public List<DisEmp> getDisEmps() {
+		return disEmps;
+	}
+
+	public void setDisEmps(List<DisEmp> disEmps) {
+		this.disEmps = disEmps;
+	}
+
+}

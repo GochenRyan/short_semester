@@ -1,0 +1,225 @@
+package com.train.dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.dept.pojo.Dept;
+import com.posts.pojo.Posts;
+import com.train.pojo.Train;
+
+
+/*
+ * 列出培训中员工信息
+ */
+public class TrainDao extends BaseDao{
+	public List<Train> list(){
+    	List<Train> lts = new ArrayList<Train>();
+    	String sql="SELECT \r\n" + 
+    			"  `id`,\r\n" + 
+    			"  `empno`,\r\n" + 
+    			"  `trainName`,\r\n" + 
+    			"  `trainType`,\r\n" + 
+    			"  `trainCmp`,\r\n" + 
+    			"  `trainLeader`,\r\n" + 
+    			"  `trainRange`,\r\n" + 
+    			"  `trainLoc`,\r\n" + 
+    			"  `trainStart`,\r\n" + 
+    			"  `trainEnd`,\r\n" + 
+    			"  `trainCost` \r\n" + 
+    			"FROM\r\n" + 
+    			"  `mng`.`train_msg`  ";
+    	Connection connection=null;
+		java.sql.Statement statement=null;
+		ResultSet resultSet = null;
+		try {
+			connection=getConnection();
+			statement=connection.createStatement();
+			resultSet=statement.executeQuery(sql);
+			while(resultSet.next()) {
+				Train train=new Train();
+				train.setEmpno(resultSet.getInt("empno"));	
+				
+				train.setTrainName(resultSet.getString("trainName"));
+				train.setTrainType(resultSet.getString("trainType"));
+				train.setTrainCmp(resultSet.getString("trainCmp"));
+				train.setTrainLeader(resultSet.getString("trainLeader"));
+				train.setTrainRange(resultSet.getString("trainRange"));
+				train.setTrainLoc(resultSet.getString("trainLoc"));
+				train.setTrainStart(resultSet.getDate("trainStart"));
+				train.setTrainEnd(resultSet.getDate("trainEnd"));
+				train.setTrainCost(resultSet.getFloat("trainCost"));
+				lts.add(train);
+			}
+		}
+		catch (Exception e) {
+			e.getMessage();
+		}
+
+		finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return lts;
+	} 	
+	public int add(Train train) {
+		int i = 0;
+		String sql = "  INSERT INTO `mng`.`train_msg` (\r\n" + 
+				" \r\n" + 
+				"  `empno`,\r\n" + 
+				"  `trainName`,\r\n" + 
+				"  `trainType`,\r\n" + 
+				"  `trainCmp`,\r\n" + 
+				"  `trainLeader`,\r\n" + 
+				"  `trainRange`,\r\n" + 
+				"  `trainLoc`,\r\n" + 
+				"  `trainStart`,\r\n" + 
+				"  `trainEnd`,\r\n" + 
+				"  `trainCost`\r\n" + 
+				") \r\n" + 
+				"VALUES\r\n" + 
+				"  (\r\n" + 
+				"    \r\n" + 
+				"      ?  ,\r\n" + 
+				"      ?  ,\r\n" + 
+				"      ?  ,\r\n" + 
+				"      ?  ,\r\n" + 
+				"      ?  ,\r\n" + 
+				"      ?  ,\r\n" + 
+				"      ?  ,\r\n" + 
+				"      ?  ,\r\n" + 
+				"      ?  ,\r\n" + 
+				"      ?\r\n" + 
+				"  )  ";
+		Connection connection = null;
+		PreparedStatement statement = null;		 
+		try {
+			connection = getConnection();
+			statement = connection.prepareStatement(sql);
+			statement.setObject(1, train.getEmpno());
+			statement.setObject(2, train.getTrainName());
+			statement.setObject(3, train.getTrainType());
+			statement.setObject(4, train.getTrainCmp());
+			statement.setObject(5, train.getTrainLeader());
+			statement.setObject(6, train.getTrainRange());
+			statement.setObject(7, train.getTrainLoc());
+			statement.setObject(8, train.getTrainStart());
+			statement.setObject(9, train.getTrainEnd());
+			statement.setObject(10, train.getTrainCost());
+			i = statement.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		} finally {			
+			try {
+				statement.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return i;
+	}
+/*
+ * 员工信息表中员工培训处理
+ */
+	public int train(int id){
+		int j = 0;
+		String sql = "UPDATE \r\n" + 
+				"  `mng`.`emp` \r\n" + 
+				"SET\r\n" + 
+				"  if_train = \"是\"\r\n" + 
+				"WHERE `empno` = ? ";
+		Connection connection = null;
+		PreparedStatement statement = null;		 
+		try {
+			connection = getConnection();
+			statement = connection.prepareStatement(sql);
+			statement.setObject(1,id);
+			j = statement.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		} finally {			
+			try {
+				statement.close();
+				connection.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return j;
+	}
+	/*结束培训*/
+	public int endtrain(Train train) {
+		int i = 0;
+		String sql =  " DELETE \r\n" + 
+				"FROM\r\n" + 
+				"  `mng`.`train_msg` \r\n" + 
+				"WHERE `empno` =  ?   ";
+		Connection connection = null;
+		PreparedStatement statement = null;		 
+		try {
+			connection = getConnection();
+			statement = connection.prepareStatement(sql);
+			statement.setObject(1, train.getEmpno());
+			i = statement.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		} finally {			
+			try {
+				statement.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return i;
+	}
+	//员工培训结束后修改员工信息表
+	public int endemp(int id){
+		int j = 0;
+		String sql = "UPDATE \r\n" + 
+				"  `mng`.`emp` \r\n" + 
+				"SET\r\n" + 
+				"  if_train = \"否\"\r\n" + 
+				"WHERE `empno` = ? ";
+		Connection connection = null;
+		PreparedStatement statement = null;		 
+		try {
+			connection = getConnection();
+			statement = connection.prepareStatement(sql);
+			statement.setObject(1,id);
+			j = statement.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		} finally {			
+			try {
+				statement.close();
+				connection.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return j;
+	}
+}

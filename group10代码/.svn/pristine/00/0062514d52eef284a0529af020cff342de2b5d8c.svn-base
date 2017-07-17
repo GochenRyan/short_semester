@@ -1,0 +1,54 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>部门信息列表</title>
+<link rel="stylesheet"
+	href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+<script
+	src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body "#F5F5DC">
+	<!-- HTML HERE -->
+	<table class="table table-striped">
+		<caption>历史离职信息</caption>
+		<thead>
+			<th>员工编号</th>
+			
+			<th>离职类型</th>
+			<th>离职日期</th>
+			<th>其他说明</th>
+		</thead>
+		<tbody>
+			<c:if test="${ empty  requestScope.disEmps}">
+				<tr>
+					<td colspan="3">没有角色数据</td>
+				</tr>
+			</c:if>
+			<c:if test="${ not  empty requestScope.disEmps}">
+				<c:forEach items="${ requestScope.disEmps }" var="d">
+					<tr>
+						<td>${d.empno }</td>
+						
+						<td>${d.dimissionType }</td>
+						<td>${d.dimissionDate }</td>
+						<td>${d.dimissionRemark}</td>
+					</tr>
+				</c:forEach>
+			</c:if>
+		</tbody>
+		  
+		
+	</table>
+
+
+	<!-- END HTML -->
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+	<script src="${ basePath}js/jquery-min-1.12.4.js"></script>
+	<!-- Include all compiled plugins (below), or include individual files as needed -->

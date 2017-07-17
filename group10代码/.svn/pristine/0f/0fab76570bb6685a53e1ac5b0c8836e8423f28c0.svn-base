@@ -1,0 +1,49 @@
+package com.train.action;
+
+import java.util.List;
+
+import com.opensymphony.xwork2.ActionSupport;
+import com.opensymphony.xwork2.ModelDriven;
+import com.posts.dao.PostDao;
+import com.posts.pojo.Posts;
+import com.train.dao.TrainDao;
+import com.train.pojo.Train;
+
+public class TrainAction extends ActionSupport implements ModelDriven<Train> {
+	private Train train = new Train();
+	private List<Train> lts;
+	
+	public String listtrain() throws Exception {
+ 		TrainDao trainDao = new TrainDao();
+ 		lts=trainDao.lts();
+ 		return "listtrain";
+ 	}
+	public String add() throws Exception {
+ 		TrainDao trainDao= new TrainDao();
+ 		int i = trainDao.add(this.train);
+ 		if (i == 0) {
+ 			return ERROR;
+ 		} else {
+ 			return this.listtrain();
+ 		}
+ 	}
+	
+	public List<Train> getLts() {
+		return lts;
+	}
+	
+	public Train getTrain() {
+		return train;
+	}
+	public void setTrain(Train train) {
+		this.train = train;
+	}
+		
+	@Override
+	public Train getModel() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+
+}

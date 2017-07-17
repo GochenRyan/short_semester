@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>岗位管理</title>
+    <!-- Bootstrap core CSS -->
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap theme -->
+    <link href="../../css/bootstrap-theme.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="JobManagement.html" rel="stylesheet">
+</head>
+<body>
+<h1>岗位管理</h1><br/>
+<table>
+    <tr>
+        <td>岗位编号</td>
+        <td>岗位名称</td>
+        <td>岗位编制</td>
+        <td>操作</td>
+    </tr>
+</table>
+
+</body>
+</html>

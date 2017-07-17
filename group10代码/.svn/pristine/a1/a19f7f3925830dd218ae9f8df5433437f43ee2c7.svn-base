@@ -1,0 +1,155 @@
+package com.dept.action;
+
+import java.util.List;
+
+import com.dept.dao.DeptDao;
+
+import com.dept.pojo.Dept;
+import com.dept.pojo.DeptEmp;
+import com.opensymphony.xwork2.ActionSupport;
+import com.opensymphony.xwork2.ModelDriven;
+
+public class DeptAction  extends ActionSupport implements ModelDriven<Dept>{
+	private int empno;
+	private String dname;
+	private DeptEmp deptEmp = new DeptEmp();
+	private Dept dept=new Dept();
+	private List<Dept> lds;
+	private List<DeptEmp> lrd;
+	
+	//部门员工调动
+	public String transfer()throws Exception{
+		DeptDao deptDao = new DeptDao();
+		int j;
+		System.out.println(empno+dname);
+		j= deptDao.tran(empno,dname);
+		if ( j== 0) {
+			return ERROR;
+		} else {
+			return this.findrole();
+		}
+	}
+	
+	
+	//列出部门中所有员工的信息
+	public String findrole() throws Exception{
+		DeptDao dd = new DeptDao();
+		lrd = dd.listDe(dept.getDptno());
+		return "findrole";
+	}
+	//对员工评价
+	public String estimate() throws Exception{
+		return "findrole";
+	}
+	/*找到一个部门*/
+	public String finddept() throws Exception{
+		DeptDao dd = new DeptDao();
+		dept = dd.finddept(dept.getDptno());
+		return "editdept";
+	}
+	//列出所有部门信息
+	public String listDpt() throws Exception {
+		DeptDao rd = new DeptDao();
+		lds = rd.lds();
+		return "listDpt";
+	}
+	/*添加部门信息*/
+	public String adddept() throws Exception {
+		DeptDao dd = new DeptDao();
+		int j = dd.adddept(this.dept);
+		if ( j== 0) {
+			return ERROR;
+		} else {
+			return this.listDpt();
+		}
+	}
+	/*删除一个部门*/
+	public String delete() throws Exception {
+		DeptDao dd = new DeptDao();
+		int i = dd.delete(this.dept);
+		if (i == 0) {
+			return ERROR;
+		} else {
+			return this.listDpt();
+		}
+	}
+	//编辑部门信息
+	public String editdept() throws Exception {
+		DeptDao dd = new DeptDao();
+		int i = dd.editdept(this.dept);
+		if (i == 0) {
+			return ERROR;
+		} else {
+			return this.listDpt();
+		}
+	}
+	
+	
+
+
+	public int getEmpno() {
+		return empno;
+	}
+
+
+	public void setEmpno(int empno) {
+		this.empno = empno;
+	}
+
+
+	public String getDname() {
+		return dname;
+	}
+
+
+	public void setDname(String dname) {
+		this.dname = dname;
+	}
+
+
+	/*
+	 * 向页面传值
+	 */
+	public List<Dept> getLds() {
+		return lds;
+	}
+	
+	public Dept getDept() {
+		return dept;
+	}
+
+	public void setDept(Dept dept) {
+		this.dept = dept;
+	}
+
+	public List<DeptEmp> getLrd() {
+		return lrd;
+	}
+
+	public DeptEmp getDeptEmp() {
+		return deptEmp;
+	}
+
+	public void setDeptEmp(DeptEmp deptEmp) {
+		this.deptEmp = deptEmp;
+	}
+
+	public void setLrd(List<DeptEmp> lrd) {
+		this.lrd = lrd;
+	}
+
+	public void setLds(List<Dept> lds) {
+		this.lds = lds;
+	}
+
+
+
+	@Override
+	public Dept getModel() {
+		if (this.dept ==null) {
+			this.dept = new Dept();
+		}
+		return this.dept;
+	}
+}
+	

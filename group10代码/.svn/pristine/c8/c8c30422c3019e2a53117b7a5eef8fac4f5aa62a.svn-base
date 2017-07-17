@@ -1,0 +1,86 @@
+<%@page import="java.util.List" %>
+<%@page import="sun.awt.RepaintArea" %>
+<%@page import="java.util.Date" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%
+	request.setCharacterEncoding("UTF-8");
+	response.setCharacterEncoding("UTF-8");
+%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>离职</title>
+<link rel="stylesheet"
+	href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+<script
+	src="http://c dn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body "#F5F5DC">
+<form action="dismission_add.action" method="post">
+	<table border="1" style="width: 500px;">
+		<tbody>
+			<tr>
+			    <th>职工编号</th>
+				<td><input name="disEmp.empno" value="330005"/></td>
+				<th>离职类型</th>
+				<td><input name="disEmp.dimissionType" value="被辞退" /></td>
+				<th>离职日期</th>
+				<td><input name="disEmp.dimissionDate" value="2010-06-17"/></td>
+				<th>其他说明</th>
+				<td><input name="disEmp.dimissionRemark" value="暂无" /></td>
+			</tr>
+		</tbody>
+		<tfoot>
+			<tr>
+				<input type="submit" value="离职" />
+			</tr>
+		</tfoot>
+	</table>
+	</form>
+<table class="table table-striped">
+		<caption>员工信息列表</caption>
+		<thead>
+			<th>员工号</th>			
+			<th>姓名</th>			
+			<th>性别</th>			
+			<th>出生日期</th>				
+			<th>入职岗位</th>		
+			<th>入职部门</th>							
+			<th>是否试用中</th>		
+			<th>是否培训中</th>			
+			<th>是否离职</th>								
+			<th>联系电话</th>			
+			<th>电子邮件</th>			
+		</thead>
+			<tbody>	
+		<c:if test="${ empty  requestScope.lrs}">
+			<tr>
+				<td colspan="3">没有角色数据</td>
+			</tr>
+		</c:if>
+		<c:if test="${ not  empty  requestScope.lrs}">
+			<c:forEach items="${requestScope.lrs}" var="r">
+				<tr>
+					<td>${r.empno}</td>
+					<td>${r.ename}</td>
+					<td>${r.esex}</td>
+					<td>${r.bornDate}</td>					
+					<td>${r.pname}</td>
+					<td>${r.dname}</td>					
+					<td>${r.if_pro}</td>
+					<td>${r.if_train}</td>
+					<td>${r.if_dim}</td>					
+					<td>${r.etel}</td>
+					<td>${r.email}</td>
+				</tr>
+			</c:forEach>
+		</c:if>
+		</tbody>
+	</table>
+</body>
+</html>

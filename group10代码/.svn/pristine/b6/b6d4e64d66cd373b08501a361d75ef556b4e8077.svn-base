@@ -1,0 +1,28 @@
+package com.posts.pojo;
+
+public class Posts {
+	private int pno;
+	private String pname;
+	private int pum;
+	public int getPno() {
+		return pno;
+	}
+	public void setPno(int pno) {
+		this.pno = pno;
+	}
+	public String getPname() {
+		return pname;
+	}
+	public void setPname(String pname) {
+		this.pname = pname;
+	}
+	public int getPum() {
+		return pum;
+	}
+	public void setPum(int pum) {
+		this.pum = pum;
+	}
+	
+	
+
+}

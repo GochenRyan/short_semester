@@ -1,0 +1,56 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>岗位信息列表</title>
+<link rel="stylesheet"
+	href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+<script
+	src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body "#F5F5DC">
+	<!-- HTML HERE -->
+	<table class="table table-striped">
+		<caption>岗位信息列表</caption>
+		<thead>
+			<th>岗位编号</th>
+			<th>岗位名称</th>
+			<th>岗位编制</th>
+			
+		</thead>
+		<tbody>
+			<c:if test="${ empty  requestScope.classAll.lps}">
+				<tr>
+					<td colspan="3">没有角色数据</td>
+				</tr>
+			</c:if>
+			<c:if test="${ not  empty requestScope.classAll.lps}">
+				<c:forEach items="${ requestScope.classAll.lps }" var="p">
+					<tr>
+						<td>${p.pno}</td>
+						<td>${p.pname }</td>
+						<td>${p.pum}</td>
+						
+					  <td><a href="posts_findpost?classAll.posts.pno= ${p.pno}">编辑</a>
+						<a href="posts_delete?classAll.posts.pno= ${p.pno}" >删除</a> <a
+					 href="posts_findrole?classAll.posts.pno=${p.pno}">查看员工</a></td>
+					</tr>
+				</c:forEach>
+			</c:if>
+		</tbody>
+		   <tfoot>
+			<a href="postadd.jsp">添加</a>
+		</tfoot>
+		</table>
+
+
+	<!-- END HTML -->
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+	<script src="${ basePath}js/jquery-min-1.12.4.js"></script>
+	<!-- Include all compiled plugins (below), or include individual files as needed -->

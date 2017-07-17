@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<package name="_dismission" namespace="/dismission" extends="struts-default">
+	<interceptors>
+			<interceptor name="userInterceptor" class="com.other.interceptor.UserInterceptor" />
+		</interceptors>
+		<!-- 定义全局result -->
+		<global-results>
+			<result name="login" type="redirect">/notlogin.jsp</result>
+		</global-results>
+		<action name="list" class="com.dismission.action.DisAction"
+			method="list">
+			<result name="list">/dismission/dislist.jsp</result>
+			<interceptor-ref name="userInterceptor"/> <!-- 应用自定义拦截器 -->
+		</action>
+		<action name="dismission_*" class="com.dismission.action.DisAction" method="{1}">
+		   <result name="error">/error.jsp</result>
+		   <result name="listrole">/dismission/apart.jsp</result>
+		</action>
+	</package>
+</struts>

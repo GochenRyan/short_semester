@@ -1,0 +1,63 @@
+package com.pro.dao;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+
+import com.pro.pojo.Pro;
+
+public class ProDao extends BaseDao {
+	 public List<Pro> lp(){
+	    	List<Pro> lp = new ArrayList<Pro>();
+	    	String sql="SELECT \r\n" + 
+	    			" \r\n" + 
+	    			"  `mng`. `emp_probation`.`empno`,\r\n" + 
+	    			"   `mng`.`emp` .`ename`,\r\n" + 
+	    			"   `mng`.`emp` .`dname`,\r\n" + 
+	    			"   `mng`.`emp` .`pname`,\r\n" + 
+	    			"  `pro_state`,\r\n" + 
+	    			"  `proStartDate`,\r\n" + 
+	    			"  `proEndDate` \r\n" + 
+	    			"\r\n" + 
+	    			"FROM\r\n" + 
+	    			"  `mng`.`emp_probation`, `mng`.`emp` \r\n" + 
+	    			"WHERE  \r\n" + 
+	    			"  `mng`.`emp`.`empno`= `mng`.`emp_probation`.`empno` ";
+	    	Connection connection=null;
+			java.sql.Statement statement=null;
+			ResultSet resultSet = null;
+			try {
+				connection=getConnection();
+				statement=connection.createStatement();
+				resultSet=statement.executeQuery(sql);
+				while(resultSet.next()) {
+					Pro pro=new Pro();
+					pro.setEmpno(resultSet.getInt("empno"));
+					pro.setEname(resultSet.getString("ename"));
+					pro.setDname(resultSet.getString("dname"));
+					pro.setPname(resultSet.getString("pname"));
+					pro.setPro_state(resultSet.getString("pro_state"));
+					pro.setProStartDate(resultSet.getDate("proStartDate"));
+					pro.setProEndDate(resultSet.getDate("proEndDate"));
+					lp.add(pro);
+				}
+			}
+			catch (Exception e) {
+				e.getMessage();
+			}
+
+			finally {
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			return lp;
+		}
+
+}

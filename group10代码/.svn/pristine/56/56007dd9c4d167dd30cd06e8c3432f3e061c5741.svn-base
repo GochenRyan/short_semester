@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+	<package name="_emp" namespace="/emp" extends="struts-default">
+		<interceptors>
+			<interceptor name="userInterceptor" class="com.other.interceptor.UserInterceptor" />
+		</interceptors>
+		<!-- 定义全局result -->
+		<global-results>
+			<result name="login" type="redirect">/notlogin.jsp</result>
+		</global-results>
+		<action name="listpart" class="com.emp.action.RoleAction"
+			method="listpart">
+			<result name="listpart">/emp/rolepart.jsp</result>
+			<interceptor-ref name="userInterceptor"/> <!-- 应用自定义拦截器 -->
+		</action>
+		<action name="role_*" class="com.emp.action.RoleAction" method="{1}">
+			<result name="list">/emp/rolelist.jsp</result>
+			<result name="error">/error.jsp</result>
+			<result name="find">/emp/roleupdate.jsp</result>
+			<result name="jump" type="redirectAction">emp/listpart.action</result>
+			<result name="find2">/emp/roleupdate2.jsp</result>
+		</action>
+	</package>
+</struts>

@@ -1,0 +1,103 @@
+<%@page import="java.util.List" %>
+<%@page import="sun.awt.RepaintArea" %>
+<%@page import="java.util.Date" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%
+	request.setCharacterEncoding("UTF-8");
+	response.setCharacterEncoding("UTF-8");
+%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>离职</title>
+<link rel="stylesheet"
+          href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+<link href="http://cdn.bootcss.com/bootstrap-validator/0.5.3/css/bootstrapValidator.min.css" rel="stylesheet" />
+<script
+           src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+<script
+          src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="http://cdn.bootcss.com/bootstrap-validator/0.5.3/js/bootstrapValidator.min.js"></script>
+</head>
+<body>
+<div class="panel panel-default">
+	<div class="panel-heading">离职</div>
+    <div class="panel-body"></div>
+<form class="form-horizontal" role="form"action="dismission_add.action" method="post"
+      style="vertical-align:middle">
+      
+      <div class="form-group">
+			<label for="empno" class="col-sm-2 control-label">职工编号</label>
+			<div class="col-sm-3">
+				<input type="text" class="form-control" id="empno" name="disEmp.empno" 
+					   value="${param.empno}" readonly>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="dimissionType" class="col-sm-2 control-label">离职类型</label>
+			<div class="col-sm-3">
+				<select type="text" class="form-control" id="dimissionType" name="disEmp.dimissionType" 
+					   placeholder="被动辞退">
+					   <option>被动辞退</option>
+			           <option>主动辞退</option>
+			           <option>其他</option>
+					   </select>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="dimissionDate" class="col-sm-2 control-label">离职日期</label>
+			<div class="col-sm-3">
+				<input type="date" class="form-control" id="dimissionDate" name="disEmp.dimissionDate" 
+					   placeholder="请输入离职日期"
+					   onfocus="if(value==''){value=''}"onblur="if (value ==''){value='2017-07-12'}">
+			</div>
+		</div>
+		<div class="form-group">
+				<label for="dimissionRemark" class="col-sm-2 control-label">其他说明</label>
+				<div class="col-sm-3">
+					<textarea class="form-control" rows="3" id="dimissionRemark" name="disEmp.dimissionRemark"
+							   placeholder="请输入说明信息"
+							  onfocus="if(value==''){value=''}"onblur="if (value ==''){value='无'}"></textarea>
+
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-offset-2 col-sm-10">
+					<button type="submit" class="btn btn-info">确认</button>
+				</div>
+			</div>
+		</form>
+
+	
+</div>
+<ul class="pager">
+		<li class="previous" onclick="javascript:window.history.back();location.reload();"><a href="#">&larr; 返回</a></li>
+	</ul>
+	
+<script type="text/javascript">
+$(function () {
+    $('form').bootstrapValidator({
+        feedbackIcons: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+	       	"disEmp.dimissionDate":{
+	       		validators:{
+	       			notEmpty:{
+	       				message: '离职日期不能为空'
+	       			}
+	       		}
+	       	},
+	       	
+        }
+    });
+});
+</script>
+	
+</body>
+</html>

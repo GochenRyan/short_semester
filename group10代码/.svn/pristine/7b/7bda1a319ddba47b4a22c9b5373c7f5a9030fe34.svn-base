@@ -1,0 +1,60 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>部门信息列表</title>
+<link rel="stylesheet"
+	href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+<script
+	src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body "#F5F5DC">
+	<!-- HTML HERE -->
+	<table class="table table-striped">
+		<caption>部门信息列表</caption>
+		<thead>
+			<th>部门编号</th>
+			<th>部门名称</th>
+			<th>部门电话</th>
+			<th>上属部门</th>
+			<th>成立日期</th>
+		</thead>
+		<tbody>
+			<c:if test="${ empty  requestScope.lds}">
+				<tr>
+					<td colspan="3">没有角色数据</td>
+				</tr>
+			</c:if>
+			<c:if test="${ not  empty requestScope.lds}">
+				<c:forEach items="${ requestScope.lds }" var="d">
+					<tr>
+						<td>${d.dptno }</td>
+						<td>${d.dname }</td>
+						<td>${d.dptTel }</td>
+						<td>${d.upDpt}</td>
+						<td>${d.setupDate}</td>
+					  <td>  <a href="dept_finddept?dept.dptno= ${d.dptno}">编辑</a>
+						<a href="dept_delete?dept.dptno= ${d.dptno}" >删除</a>
+						<a href="dept_check?dept.dname= ${d.dname}" >查看员工</a></td>
+					</tr>
+				</c:forEach>
+			</c:if>
+		</tbody>
+		   <tfoot>
+			<a href="deptadd.jsp">添加</a>
+		</tfoot>
+		  
+		
+	</table>
+
+
+	<!-- END HTML -->
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+	<script src="${ basePath}js/jquery-min-1.12.4.js"></script>
+	<!-- Include all compiled plugins (below), or include individual files as needed -->

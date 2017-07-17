@@ -1,0 +1,93 @@
+package com.dept.action;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import com.dept.dao.DeptDao;
+
+import com.dept.pojo.Dept;
+import com.emp.pojo.Role;
+import com.opensymphony.xwork2.ActionSupport;
+import com.opensymphony.xwork2.ModelDriven;
+
+public class DeptAction  extends ActionSupport implements ModelDriven<Dept>{
+	private Dept dept=new Dept();
+	/*列出部门信息*/
+	public String finddept() throws Exception{
+		DeptDao dd = new DeptDao();
+		dept = dd.finddept(dept.getDptno());
+		return "editdept";
+	}
+	
+	//列出部门中所有员工的信息
+	public String check() throws Exception{
+		DeptDao dd = new DeptDao();
+		List<Role> lrs;
+		lrs = dd.check(dept.getDname());
+		return "check";
+	}
+	
+	public String listDpt() throws Exception {
+		DeptDao rd = new DeptDao();
+		lds = rd.lds();
+		return "listDpt";
+	}
+	/*添加部门信息*/
+	public String adddept() throws Exception {
+		DeptDao dd = new DeptDao();
+		int j = dd.adddept(this.dept);
+		if ( j== 0) {
+			return ERROR;
+		} else {
+			return this.listDpt();
+		}
+	}
+	/*删除一个部门*/
+	public String delete() throws Exception {
+		DeptDao dd = new DeptDao();
+		int i = dd.delete(this.dept);
+		if (i == 0) {
+			return ERROR;
+		} else {
+			return this.listDpt();
+		}
+	}
+	public String editdept() throws Exception {
+		DeptDao dd = new DeptDao();
+		int i = dd.editdept(this.dept);
+		if (i == 0) {
+			return ERROR;
+		} else {
+			return this.listDpt();
+		}
+	}
+	
+	
+	/*
+	 * 向页面传值
+	 */
+	private List<Dept> lds;
+	public List<Dept> getLds() {
+		return lds;
+	}
+	
+	public Dept getDept() {
+		return dept;
+	}
+
+	public void setDept(Dept dept) {
+		this.dept = dept;
+	}
+
+	
+
+
+	@Override
+	public Dept getModel() {
+		if (this.dept ==null) {
+			this.dept = new Dept();
+		}
+		return this.dept;
+	}
+}
+	

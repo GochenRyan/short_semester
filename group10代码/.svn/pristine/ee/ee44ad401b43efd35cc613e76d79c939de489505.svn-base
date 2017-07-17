@@ -1,0 +1,71 @@
+package com.emp.action;
+
+import java.util.List;
+
+import com.emp.dao.RoleDao;
+import com.emp.pojo.Role;
+import com.opensymphony.xwork2.ActionSupport;
+import com.opensymphony.xwork2.ModelDriven;
+
+public class RoleAction extends ActionSupport implements ModelDriven<Role>{
+	private Role role=new Role();
+	private List<Role> lrs;
+	public String list() throws Exception {
+		RoleDao roleDao=new RoleDao();
+		lrs=roleDao.lrs();
+		return "list";
+	}
+	public String findrole() throws Exception {
+		RoleDao rd = new RoleDao();
+		this.role=rd.findrole(this.role.getEmpno());
+		return "find";
+	}
+	public String update() throws Exception {
+		RoleDao rd = new RoleDao();
+		int i = rd.update(this.role);
+		if (i == 0) {
+			return ERROR;
+		} else {
+			return this.list();
+		}
+	}
+	public String add() throws Exception {
+		RoleDao rd = new RoleDao();
+		int i = rd.add(this.role);
+		if (i == 0) {
+			return ERROR;
+		} else {
+			return this.list();
+		}
+	}
+	public String delete() throws Exception {
+		RoleDao rd = new RoleDao();
+		int i = rd.delete(this.role);
+		if (i == 0) {
+			return ERROR;
+		} else {
+			return this.list();
+		}
+	}
+	public List<Role> getLrs() {
+		return lrs;
+	}
+
+	public Role getRole() {
+		return role;
+	}
+
+	public void setRole(Role role) {
+		this.role = role;
+	}
+
+	@Override
+	public Role getModel() {
+		// TODO Auto-generated method stub
+		if (this.role ==null) {
+			this.role = new Role();
+		}
+		return this.role;
+	}
+}
+

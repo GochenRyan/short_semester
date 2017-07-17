@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<package name="_dept" namespace="/dept" extends="struts-default">
+	<interceptors>
+			<interceptor name="userInterceptor" class="com.other.interceptor.UserInterceptor" />
+		</interceptors>
+		<!-- 定义全局result -->
+		<global-results>
+			<result name="login" type="redirect">/notlogin.jsp</result>
+		</global-results>
+		<action name="listDpt" class="com.dept.action.DeptAction"
+			method="listDpt">
+			<result name="listDpt">/dept/deptlist.jsp</result>
+			<interceptor-ref name="userInterceptor"/> <!-- 应用自定义拦截器 -->
+		</action>
+		<action name="listTransfer" class="com.dept.action.DeptAction"
+			method="listTransfer">
+			<result name="listTransfer">/dept/listTransfer.jsp</result>
+			<interceptor-ref name="userInterceptor"/> <!-- 应用自定义拦截器 -->
+		</action>
+		<action name="dept_*" class="com.dept.action.DeptAction"
+			method="{1}">
+			<result name="editdept">/dept/deptedit.jsp</result>
+			<result name="error">/error.jsp</result>
+			<result name="findrole">/dept/findrole.jsp</result>
+			<result name="before">/dept/transfer.jsp</result>
+			<result name="listDpt">/dept/deptlist.jsp</result>
+		</action>
+	</package>
+</struts>

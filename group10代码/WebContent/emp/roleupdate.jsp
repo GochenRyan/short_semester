@@ -1,0 +1,265 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>后台管理_修改成员</title>
+	<link rel="stylesheet"
+		href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link href="http://cdn.bootcss.com/bootstrap-validator/0.5.3/css/bootstrapValidator.min.css" rel="stylesheet" />
+	<script
+		src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script
+		src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<script src="http://cdn.bootcss.com/bootstrap-validator/0.5.3/js/bootstrapValidator.min.js"></script>
+		<!-- 调用外部javascript -->
+	<script type="text/javascript" src="../assets/js/ver_role.js"></script>
+</head>
+<body>
+	<form class="form-horizontal" role="form"  action="role_update.action" method="post"
+          style="vertical-align:middle">
+			<tbody>
+		<div class="form-group">
+            <label for="empno" class="col-sm-2 control-label">员工编号</label>
+            <div class="col-sm-3">
+                <input type="text" class="form-control" id="empno" name="empno" 
+                       value="${role.empno}" readonly="readonly">
+            </div>
+        </div>
+			<div class="form-group">
+            <label for="ename" class="col-sm-2 control-label">姓名</label>
+            <div class="col-sm-3">
+                <input type="text" class="form-control" id="ename" name="ename" 
+                       value="${role.ename}">
+            </div>
+        </div>
+			<div class="form-group">
+            <label for="esex" class="col-sm-2 control-label">性别</label>
+            <div class="col-sm-3">
+                <select type="text" class="form-control" id="esex" name="esex" 
+                        value="${role.esex}">
+                    <option>男</option>
+                    <option>女</option>
+                </select>
+            </div>
+        </div>
+			<div class="form-group">
+            <label for="bornDate" class="col-sm-2 control-label">出生日期</label>
+            <div class="col-sm-3">
+                <input type="date" class="form-control" id="bornDate" name="bornDate" 
+                       value="${role.bornDate}">
+            </div>
+        </div>
+			<div class="form-group">
+            <label for="identityId" class="col-sm-2 control-label">身份证号</label>
+            <div class="col-sm-3">
+                <input type="text" class="form-control" id="identityId" name="identityId" 
+                       value="${role.identityId}">
+            </div>
+            </div>
+
+        <div class="form-group" hidden>
+            <label for="pname" class="col-sm-2 control-label">入职岗位</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="pname" name="pname" 
+                       value="${role.pname}" readonly>
+            </div>
+        </div>
+
+        <div class="form-group" hidden>
+            <label for="dname" class="col-sm-2 control-label">入职部门</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="dname" name="dname" 
+                       value="${role.dname}" readonly>
+            </div>
+        </div>
+
+        </div>
+			<div class="form-group">
+            <label for="entryDate" class="col-sm-2 control-label">入职日期</label>
+            <div class="col-sm-3">
+                <input type="date" class="form-control" id="entryDate" name="entryDate" 
+                       value="${role.entryDate}">
+            </div>
+            </div>
+        <div class="form-group" hidden>
+            <label for="if_pro" class="col-sm-2 control-label">是否试用中</label>
+            <div class="col-sm-10">
+                <select type="text" class="form-control" id="if_pro" name="if_pro" 
+                        value="${role.if_pro}" readonly>
+                    <option>否</option>
+                </select>
+            </div>
+        </div>
+        </div>
+        <div class="form-group" hidden>
+            <label for="if_train" class="col-sm-2 control-label">是否培训中</label>
+            <div class="col-sm-10">
+                <select type="text" class="form-control" id="if_train" name="if_train" 
+                        value="${role.if_train}" readonly="readonly">
+                    <option>否</option>
+                </select>
+            </div>
+        </div>
+        </div>
+			<div class="form-group" hidden>
+            <label for="if_dim" class="col-sm-2 control-label">是否离职</label>
+            <div class="col-sm-3">
+                <select type="text" class="form-control" id="if_dim" name="if_dim" 
+                        value="${role.if_dim}" readonly>
+                    <option>否</option>
+                </select>
+            </div>
+        </div>
+			<div class="form-group">
+            <label for="workDate" class="col-sm-2 control-label">参加工作日期</label>
+            <div class="col-sm-3">
+                <input type="date" class="form-control" id="workDate" name="workDate" 
+                       value="${role.workDate}">
+            </div>
+        </div>
+			<div class="form-group">
+            <label for="workWay" class="col-sm-2 control-label">用工形式</label>
+            <div class="col-sm-3">
+                <select type="text" class="form-control" id="workWay" name="workWay" 
+                        value="${role.workWay}">
+                    <option>正式员工</option>
+                    <option>临时员工</option>
+                </select>
+            </div>
+        </div>
+			<div class="form-group">
+            <label for="employeeOrigin" class="col-sm-2 control-label">人员来源</label>
+            <div class="col-sm-3">
+                <select type="text" class="form-control" id="employeeOrigin" name="employeeOrigin" 
+                        value="${role.employeeOrigin}">
+                    <option>校园招聘</option>
+                    <option>社会招聘</option>
+                    <option>其他</option>
+                </select>
+            </div>
+        </div>
+			<div class="form-group">
+            <label for="politicalStatus" class="col-sm-2 control-label">政治面貌</label>
+            <div class="col-sm-3">
+                <select type="text" class="form-control" id="politicalStatus" name="politicalStatus" 
+                        value="${role.politicalStatus}">
+                    <option>党员</option>
+                    <option>团员</option>
+                    <option>群众</option>
+                </select>
+            </div>
+        </div>
+			<div class="form-group">
+            <label for="enation" class="col-sm-2 control-label">民族</label>
+            <div class="col-sm-3">
+                <input type="text" class="form-control" id="enation" name="enation" 
+                       value="${role.enation}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="enative" class="col-sm-2 control-label">籍贯</label>
+            <div class="col-sm-3">
+                <input type="text" class="form-control" id="enative" name="enative" 
+                       value="${role.enative}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="etel" class="col-sm-2 control-label">联系电话</label>
+            <div class="col-sm-3">
+                <input type="text" class="form-control" id="etel" name="etel" 
+                       value="${role.etel}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="email" class="col-sm-2 control-label">电子邮件</label>
+            <div class="col-sm-3">
+                <input type="text" class="form-control" id="email" name="email" 
+                       value="${role.email}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="bloodType" class="col-sm-2 control-label">血型</label>
+            <div class="col-sm-3">
+                <input type="text" class="form-control" id="bloodType" name="bloodType" 
+                       value="${role.bloodType}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="marriageStatus" class="col-sm-2 control-label">婚姻状况</label>
+            <div class="col-sm-3">
+                <select type="text" class="form-control" id="marriageStatus" name="marriageStatus" 
+                        value="${role.marriageStatus}">
+                    <option>未婚</option>
+                    <option>已婚</option>
+                    <option>离异</option>
+                    <option>丧偶</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="hometown" class="col-sm-2 control-label">出生地</label>
+            <div class="col-sm-3">
+                <input type="text" class="form-control" id="hometown" name="hometown" 
+                       value="${role.hometown}">
+            </div>
+        </div>
+			<div class="form-group">
+            <label for="registerPlace" class="col-sm-2 control-label">户口所在地</label>
+            <div class="col-sm-3">
+                <input type="text" class="form-control" id="registerPlace" name="registerPlace" 
+                       value="${role.registerPlace}">
+            </div>
+        </div>
+			 <div class="form-group">
+            <label for="qualification" class="col-sm-2 control-label">学历</label>
+            <div class="col-sm-3">
+                <select type="text" class="form-control" id="qualification" name="qualification" 
+                        value="${role.qualification}">
+                    <option>本科</option>
+                    <option>硕士</option>
+                    <option>其它</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="graduatedSchool" class="col-sm-2 control-label">毕业院校</label>
+            <div class="col-sm-3">
+                <input type="text" class="form-control" id="graduatedSchool" name="graduatedSchool" 
+                       value="${role.graduatedSchool}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="emajor" class="col-sm-2 control-label">所学专业</label>
+            <div class="col-sm-3">
+                <input type="text" class="form-control" id="emajor" name="emajor" 
+                       value="${role.emajor}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="graduatedDate" class="col-sm-2 control-label">毕业日期</label>
+            <div class="col-sm-3">
+                <input type="date" class="form-control" id="graduatedDate" name="graduatedDate" 
+                       value="${role.graduatedDate}">
+            </div>
+        </div>
+			
+		</tbody>
+		
+			<div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-info">确认</button>
+            </div>
+        </div>
+        
+	</table>
+	</form>
+	
+	<ul class="pager">
+    <li class="previous" onclick="javascript:window.history.back();location.reload();"><a href="#">&larr; 返回</a></li>
+</ul>
+</body>
+</html>

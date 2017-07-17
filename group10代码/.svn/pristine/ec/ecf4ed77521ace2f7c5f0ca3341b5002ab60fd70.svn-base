@@ -1,0 +1,34 @@
+package com.dept.pojo;
+
+import java.util.List;
+
+public class ClassBag {
+	private Dept dept= new Dept();
+	private DeptTransfer deptTransfer=new DeptTransfer();
+	private List<Dept> lds;
+	private List<DeptEmp> lrd;
+	public List<Dept> getLds() {
+		return lds;
+	}
+	public void setLds(List<Dept> lds) {
+		this.lds = lds;
+	}
+	public List<DeptEmp> getLrd() {
+		return lrd;
+	}
+	public void setLrd(List<DeptEmp> lrd) {
+		this.lrd = lrd;
+	}
+	public Dept getDept() {
+		return dept;
+	}
+	public void setDept(Dept dept) {
+		this.dept = dept;
+	}
+	public DeptTransfer getDeptTransfer() {
+		return deptTransfer;
+	}
+	public void setDeptTransfer(DeptTransfer deptTransfer) {
+		this.deptTransfer = deptTransfer;
+	}
+}

@@ -1,0 +1,62 @@
+<%@page import="java.util.List" %>
+<%@page import="sun.awt.RepaintArea" %>
+<%@page import="java.util.Date" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%
+	request.setCharacterEncoding("UTF-8");
+	response.setCharacterEncoding("UTF-8");
+%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>新增岗位</title>
+<link rel="stylesheet"
+		  href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script
+			src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script
+			src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="panel panel-default">
+	<div class="panel-heading">新建部门</div>
+<form class="form-horizontal" role="form"action="posts_add.action" method="post"
+      style="vertical-align:middle">
+      
+		<div class="form-group">
+			<label for="pno" class="col-sm-2 control-label">岗位编号</label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" id="pno" name="classAll.posts.pno" style="width:200px"
+					   placeholder="请输入岗位编号">
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="pname" class="col-sm-2 control-label">岗位名称</label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" id="pname" name="classAll.posts.pname" style="width:200px"
+					   placeholder="请输入岗位名称">
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="pum" class="col-sm-2 control-label">岗位编制</label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" id="pum" name="classAll.posts.pum" style="width:200px"
+					   placeholder="请输入岗位编制">
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-sm-offset-2 col-sm-10">
+				<button type="submit" class="btn btn-info">确认</button>
+			</div>
+		</div>
+	</form>
+	
+</div>
+<ul class="pager">
+	<li class="previous" onclick="javascript:window.history.back();location.reload();"><a href="#">&larr; 返回</a></li>
+</ul>
+</body>
+</html>

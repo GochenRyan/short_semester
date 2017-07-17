@@ -1,0 +1,98 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>员工信息</title>
+<link rel="stylesheet"
+	href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+<script
+	src="http://c dn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body  "#F5F5DC">
+	<table class="table table-striped">
+		<caption>员工信息列表</caption>
+		<thead>
+			<th>员工号</th>			
+			<th>姓名</th>			
+			<th>性别</th>			
+			<th>出生日期</th>			
+			<th>身份证号</th>
+			<th>入职岗位</th>		
+			<th>入职部门</th>			
+			<th>入职日期</th>		
+			<th>是否试用中</th>		
+			<th>是否培训中</th>			
+			<th>是否离职</th>			
+			<th>参加工作日期</th>		
+			<th>用工形式</th>			
+			<th>人员来源</th>		
+			<th>政治面貌</th>			
+			<th>民族</th>		
+			<th>籍贯</th>			
+			<th>联系电话</th>			
+			<th>电子邮件</th>			
+			<th>血型</th>		
+			<th>婚姻状况</th>			
+			<th>出生地</th>	
+			<th>户口所在地</th>		
+			<th>学历</th>			
+			<th>毕业院校</th>	
+			<th>所学专业</th>		
+			<th>毕业日期</th>
+	
+		</thead>
+			<tbody>	
+		<c:if test="${ empty  requestScope.lrs}">
+			<tr>
+				<td colspan="3">没有角色数据</td>
+			</tr>
+		</c:if>
+		<c:if test="${ not  empty  requestScope.lrs}">
+			<c:forEach items="${  requestScope.lrs }" var="r">
+				<tr>
+					<td>${r.empno }</td>
+					<td>${r.ename }</td>
+					<td>${r.esex }</td>
+					<td>${r.bornDate }</td>
+					<td>${r.identityId }</td>
+					<td>${r.pname }</td>
+					<td>${r.dname }</td>
+					<td>${r.entryDate }</td>
+					<td>${r.if_pro }</td>
+					<td>${r.if_train }</td>
+					<td>${r.if_dim }</td>
+					<td>${r.workDate }</td>
+					<td>${r.workWay }</td>
+					<td>${r.employeeOrigin }</td>
+					<td>${r.politicalStatus }</td>					
+					<td>${r.enation }</td>					
+					<td>${r.enative }</td>
+					<td>${r.etel}</td>
+					<td>${r.email }</td>
+					<td>${r.bloodType }</td>
+					<td>${r.marriageStatus }</td>
+					<td>${r.hometown }</td>					
+					<td>${r.registerPlace }</td>
+					<td>${r.qualification }</td>
+					<td>${r.graduatedSchool }</td>
+					<td>${r.emajor }</td>
+					<td>${r.graduatedDate }</td>
+					<td><a href="role_findrole.action?empno=${r.empno}">编辑</a>
+					 <a href="role_delete.action?empno=${r.empno}">删除</a></td>
+				</tr>
+			</c:forEach>
+			
+		</c:if>
+		</tbody>
+	
+	<tfoot>
+	<a href="roleadd.jsp">添加</a>
+	</tfoot>
+	</table>
+<script src="${ basePath}js/jquery-min-1.12.4.js"></script>

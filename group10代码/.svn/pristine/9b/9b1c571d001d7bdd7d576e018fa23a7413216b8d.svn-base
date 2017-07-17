@@ -1,0 +1,92 @@
+package com.train.action;
+
+import java.util.List;
+
+
+import com.emp.dao.RoleDao;
+import com.emp.pojo.Role;
+import com.opensymphony.xwork2.ActionSupport;
+import com.opensymphony.xwork2.ModelDriven;
+import com.train.dao.TrainDao;
+import com.train.pojo.Train;
+
+public class TrainAction extends ActionSupport implements ModelDriven<Train> {
+	private Train train = new Train();
+	private  List<Train> lts;
+
+	private List<Role> lrs;
+	
+
+	public String apart() throws Exception {
+		RoleDao roleDao=new RoleDao();
+		lrs=roleDao.lrs();
+		return "listrole";
+	}
+	
+	
+	/*
+	 *列出所有培训中员工信息
+	 */
+	
+	public String listtrain() throws Exception {
+ 		TrainDao trainDao = new TrainDao();
+ 		lts=trainDao.list();
+ 		return "listtrain";
+ 	}
+	
+	/*
+	 * 向培训表中加入培训员工信息
+	 */
+
+	public String add() throws Exception {
+		TrainDao trainDao = new TrainDao();
+		int i=0;
+		i=trainDao.add(train);
+		if ( i== 0) {
+			return ERROR;
+		} else {
+			i=trainDao.tran(train.getEmpno());
+			if ( i== 0) {
+				return ERROR;
+			}
+			else{
+				return this.listtrain();
+			}
+		}
+
+	}
+	
+	
+	public List<Role> getLrs() {
+		return lrs;
+	}
+	public void setLrs(List<Role> lrs) {
+		this.lrs = lrs;
+	}
+	
+	public List<Train> getLts() {
+		return lts;
+	}
+	public void setLts(List<Train> lts) {
+		this.lts = lts;
+	}
+	
+	
+
+	
+	public Train getTrain() {
+		return train;
+	}
+	
+	public void setTrain(Train train) {
+		this.train = train;
+	}
+	@Override
+	public Train getModel() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	
+
+}

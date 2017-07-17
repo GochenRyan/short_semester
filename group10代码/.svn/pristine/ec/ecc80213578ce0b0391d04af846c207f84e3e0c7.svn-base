@@ -1,0 +1,65 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>部门信息列表</title>
+<link rel="stylesheet"
+	href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+<script
+	src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body "#F5F5DC">
+	<!-- HTML HERE -->
+	<table class="table table-striped">
+		<caption>部门员工信息列表</caption>
+		<thead>
+			<th>部门编号</th>
+			<th>部门名称</th>
+			<th>员工名称</th>
+			<th>员工编号</th>
+			<th>员工性别</th>
+			<th>是否离职</th>
+			<th>是否试用中</th>
+			<th>是否培训中</th>
+		</thead>
+		<tbody>
+			<c:if test="${ empty  requestScope.lrd}">
+				<tr>
+					<td colspan="3">没有角色数据</td>
+				</tr>
+			</c:if>
+			<c:if test="${ not  empty requestScope.lrd}">
+				<c:forEach items="${ requestScope.lrd }" var="d">
+					<tr>
+						<td>${d.dptno }</td>
+						<td>${d.dname }</td>
+						<td>${d.empno }</td>
+						<td>${d.ename}</td>
+						<td>${d.esex}</td>
+						<td>${d.if_pro}</td>
+						<td>${d.if_train}</td>
+						<td>${d.if_dim}</td>
+					  <td>  
+					  	<a href="dept_transfer.action">部门调动</a>
+					</tr>
+				</c:forEach>
+			</c:if>
+		</tbody>
+		   <tfoot>
+			<a href="deptadd.jsp">添加</a>
+		</tfoot>
+		  
+		
+	</table>
+
+
+	<!-- END HTML -->
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+	<script src="${ basePath}js/jquery-min-1.12.4.js"></script>
+	<!-- Include all compiled plugins (below), or include individual files as needed -->

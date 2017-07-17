@@ -1,0 +1,121 @@
+package com.pro.dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+
+import com.emp.pojo.Role;
+
+import com.dept.pojo.Dept;
+
+import com.pro.pojo.Pro;
+
+public class ProDao extends BaseDao {
+	//由编号找到员工具体信息
+	public Pro find(int id) {
+		Pro pro = new Pro();
+		String sql = "SELECT \r\n" + 
+				"  `id`,\r\n" + 
+				"  `empno`,\r\n" + 
+				"  `pro_state`,\r\n" + 
+				"  `proStartDate`,\r\n" + 
+				"  `proEndDate` \r\n" + 
+				"FROM\r\n" + 
+				"  `mng`.`emp_probation` \r\n" + 
+				"WHERE empno= ? \r\n" + 
+				"";
+		Connection connection = null;
+		PreparedStatement statement = null;
+		ResultSet resultSet = null;
+		try {
+			connection = getConnection();
+			statement = connection.prepareStatement(sql);
+			statement.setObject(1, id);
+			resultSet = statement.executeQuery();
+
+			while (resultSet.next()) {
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		} finally {
+			try {
+				resultSet.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			try {
+				statement.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return pro;
+	}
+	
+	//试用期员工的所有信息
+	public List<Pro> lp(){
+		List<Pro> lp = new ArrayList<Pro>();
+		String sql="SELECT \r\n" + 
+				"  \r\n" + 
+				"  `mng`.`emp_probation`.`empno`,\r\n" + 
+				"  `mng`.`emp`.`ename`,\r\n" + 
+				"  `mng`.`emp`.`dname`,\r\n" + 
+				"  `mng`.`emp`.`pname`,\r\n" + 
+				"  `pro_state`,\r\n" + 
+				"  `proStartDate`,\r\n" + 
+				"  `proEndDate` \r\n" + 
+				"FROM\r\n" + 
+				"  `mng`.`emp_probation`  ,`mng`.`emp`\r\n" + 
+				"  WHERE \r\n" + 
+				"  `mng`.`emp_probation`.`empno`=`mng`.`emp`.`empno`";  
+			
+		Connection connection=null;
+		java.sql.Statement statement=null;
+		ResultSet resultSet = null;
+		try {
+			connection=getConnection();
+			statement=connection.createStatement();
+			resultSet=statement.executeQuery(sql);
+			while(resultSet.next()) {
+				Pro pro=new Pro();
+				pro.setEmpno(resultSet.getInt("empno"));
+				pro.setEname(resultSet.getString("ename"));
+				pro.setDname(resultSet.getString("dname"));
+				pro.setPname(resultSet.getString("pname"));
+				pro.setPro_state(resultSet.getString("pro_state"));
+				pro.setProStartDate(resultSet.getDate("proStartDate"));
+				pro.setProEndDate(resultSet.getDate("proEndDate"));
+				lp.add(pro);
+			}
+		}
+		catch (Exception e) {
+			e.getMessage();
+		}
+
+		finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
+
+		return lp;
+	}
+
+
+}

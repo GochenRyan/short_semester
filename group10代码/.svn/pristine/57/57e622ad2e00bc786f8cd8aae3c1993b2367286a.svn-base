@@ -1,0 +1,139 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>后台管理_修改成员</title>
+<link rel="stylesheet"
+	href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+<script
+	src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<form action="role_update.action" method="post">
+		<table border="1" style="width: 500px;">
+			<tbody>
+		<tr>
+				<td>员工号</td>
+				<td><input name="empno" value="${role.empno}" readonly="readonly"/></td>
+			</tr>
+			<tr>
+				<td>姓名</td>
+				<td><input name="ename" value="${role.ename}" /></td>
+			</tr>
+			<tr>
+				<td>性别</td>
+				<td><input name="esex" value="${role.esex}" /></td>
+			</tr>
+			<tr>
+				<td>出生日期</td>
+				<td><input name="bornDate" value="${role.bornDate}" /></td>
+			</tr>
+			<tr>
+				<td>身份证号</td>
+				<td><input name="identityId" value="${role.identityId}" /></td>
+			</tr>
+			<tr>
+				<td>入职岗位</td>
+				<td><input name="dname" value="${role.pname}" /></td>
+			</tr>
+			<tr>
+				<td>入职部门</td>
+				<td><input name="pname" value="${role.dname}" /></td>
+			</tr>
+			<tr>
+				<td>入职日期</td>
+				<td><input name="entryDate" value="${role.entryDate}" /></td>
+			</tr>
+			<tr>
+				<td>是否试用中</td>
+				<td><input name="if_pro" value="${role.if_pro}" /></td>
+			</tr>
+			<tr>
+				<td>是否培训中</td>
+				<td><input name="if_train" value="${role.if_train}" /></td>
+			</tr>
+			<tr>
+				<td>是否离职</td>
+				<td><input name="if_dim" value="${role.if_dim}" /></td>
+			</tr>
+			<tr>
+				<td>参加工作日期</td>
+				<td><input name="workDate" value="${role.workDate}" /></td>
+			</tr>
+			<tr>
+				<td>用工形式</td>
+				<td><input name="workWay" value="${role.workWay}" /></td>
+			</tr>
+			<tr>
+				<td>人员来源</td>
+				<td><input name="employeeOrigin" value="${role.employeeOrigin}" /></td>
+			</tr>
+			<tr>
+				<td>政治面貌</td>
+				<td><input name="politicalStatus" value="${role.politicalStatus}" /></td>
+			</tr>
+			<tr>
+				<td>民族</td>
+				<td><input name="enation" value="${role.enation}" /></td>
+			</tr>
+			<tr>
+				<td>籍贯</td>
+				<td><input name="enative" value="${role.enative}" /></td>
+			</tr>
+			<tr>
+				<td>联系电话</td>
+				<td><input name="etel" value="${role.etel}" /></td>
+			</tr>
+			<tr>
+				<td>电子邮件</td>
+				<td><input name="email" value="${role.email}" /></td>
+			</tr>
+			<tr>
+				<td>血型</td>
+				<td><input name="bloodType" value="${role.bloodType}" /></td>
+			</tr>
+			<tr>
+				<td>婚姻状况</td>
+				<td><input name="marriageStatus" value="${role.marriageStatus}" /></td>
+			</tr>
+			<tr>
+				<td>出生地</td>
+				<td><input name="hometown" value="${role.hometown}" /></td>
+			</tr>
+			<tr>
+				<td>户口所在地</td>
+				<td><input name="registerPlace" value="${role.registerPlace}" /></td>
+			</tr>
+			<tr>
+				<td>学历</td>
+				<td><input name="qualification" value="${role.qualification}" /></td>
+			</tr>
+			<tr>
+				<td>毕业院校</td>
+				<td><input name="graduatedSchool" value="${role.graduatedSchool}" /></td>
+			</tr>
+			<tr>
+				<td>所学专业</td>
+				<td><input name="emajor" value="${role.emajor}" /></td>
+			</tr>
+			<tr>
+				<td>毕业日期</td>
+				<td><input name="graduatedDate" value="${role.graduatedDate}" /></td>
+			</tr>
+			
+		</tbody>
+		<tfoot>
+			<tr>
+				<input type="submit" value="保存" />
+			</tr>
+		</tfoot>
+	</table>
+	</form>
+</body>
+</html>

@@ -1,0 +1,19 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: FLcolin
+  Date: 2017/7/11
+  Time: 17:09
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>Title</title>
+</head>
+<body>
+<a href="emp/role_listpart.action" target="mainFrame"> 角色管理</a><br/>
+<a href="dept/dept_listDpt.action" target="mainFrame"> 部门管理</a><br/>
+<a href="posts/posts_listpost.action" target="mainFrame"> 岗位管理</a><br/>
+<a href="pro/pro_listpro.action" target="mainFrame"> 试用期员工管理</a><br/>
+</body>
+</html>

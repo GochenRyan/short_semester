@@ -1,0 +1,79 @@
+<%@page import="java.util.List" %>
+<%@page import="sun.awt.RepaintArea" %>
+<%@page import="java.util.Date" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%
+	request.setCharacterEncoding("UTF-8");
+	response.setCharacterEncoding("UTF-8");
+%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>员工调动</title>
+<link rel="stylesheet"
+	href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+<script
+	src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body "#F5F5DC">
+	<!-- HTML HERE -->
+<form action="dept_transfer.action" method="post">
+	<table border="1" style="width: 500px;">
+		<tbody>
+			<tr>
+			    <th>员工编号</th>
+				<td><input name="classBag.deptTransfer.empno" value="${param.empno}" /></td>
+				<th>原部门编号</th>
+				<td><input name="classBag.deptTransfer.oldDptno" value="${param.oldDptno}" /></td>
+				<th>新部门编号</th>
+				<td><input name="classBag.deptTransfer.newDptno" value=""/></td>
+				<th>调动类型</th>
+				<td><input name="classBag.deptTransfer.dptTransferType" value="平调"/></td>
+				<th>调动原因</th>
+				<td><input name="classBag.deptTransfer.dptTransferCause" value="公司人员调整"/></td>
+				<th>备注信息</th>
+				<td><input name="classBag.deptTransfer.dptTransferRemark" value="无"/></td>
+				<th>调动日期</th>
+				<td><input name="classBag.deptTransfer.dptTransferDate" value="2017-8-8"/></td>
+			</tr>
+		</tbody>
+		<tfoot>
+			<tr>
+				<input type="submit" value="调动" />
+			</tr>
+		</tfoot>
+	</table>
+	</form>
+<table class="table table-striped">
+		<caption>部门信息列表</caption>
+		<thead>
+			<th>部门编号</th>
+			<th>部门名称</th>
+			<th>部门电话</th>
+			<th>上属部门</th>
+			<th>成立日期</th>
+		</thead>
+		<tbody>
+				<c:forEach items="${ requestScope.classBag.lds }" var="d">
+					<tr>
+						<td>${d.dptno }</td>
+						<td>${d.dname }</td>
+						<td>${d.dptTel }</td>
+						<td>${d.upDpt}</td>
+						<td>${d.setupDate}</td>
+					</tr>
+				</c:forEach>
+		</tbody>
+	</table>
+
+</body>
+</html>
+	<!-- END HTML -->
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+	<script src="${ basePath}js/jquery-min-1.12.4.js"></script>
+	<!-- Include all compiled plugins (below), or include individual files as needed -->
